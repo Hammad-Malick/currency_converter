@@ -2,7 +2,7 @@
   "version": 2,
   "name": "currency-converter-frontend",
   "buildCommand": "ng build --configuration=production",
-  "outputDirectory": "dist/currency-converter-app/browser",
+  "outputDirectory": "dist/currency-converter-app",
   "installCommand": "npm install",
   "framework": "angular",
   "redirects": [

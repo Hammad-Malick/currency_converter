@@ -12,8 +12,8 @@
   ],
   "redirects": [
     {
-      "src": "/(.*)",
-      "dest": "/src/app.ts"
+      "source": "/(.*)",
+      "destination": "/src/app.ts"
     }
   ],
   "env": {

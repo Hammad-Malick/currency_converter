@@ -10,7 +10,7 @@
       }
     }
   ],
-  "routes": [
+  "redirects": [
     {
       "src": "/(.*)",
       "dest": "/src/app.ts"

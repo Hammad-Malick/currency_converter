@@ -5,7 +5,7 @@
   "outputDirectory": "dist/currency-converter-app/browser",
   "installCommand": "npm install",
   "framework": "angular",
-  "routes": [
+  "redirects": [
     {
       "src": "/(.*)",
       "dest": "/index.html"

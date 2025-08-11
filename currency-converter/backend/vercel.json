@@ -4,10 +4,7 @@
   "builds": [
     {
       "src": "src/app.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["src/**/*"]
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -18,11 +15,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "src/app.ts": {
-      "memory": 1024,
-      "maxDuration": 30
-    }
   }
 }

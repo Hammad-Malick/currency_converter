@@ -1,0 +1,26 @@
+<!-- Mobile App Container -->
+<div class="mobile-app-container">
+  <!-- Top Navigation -->
+  <div class="top-navigation">
+    <h1 class="app-title">Currency Converter</h1>
+    <div class="nav-tabs">
+      <button class="nav-tab" 
+              [class.active]="router.url === '/converter'" 
+              (click)="navigateTo('/converter')">
+        <mat-icon>currency_exchange</mat-icon>
+        <span>Convert</span>
+      </button>
+      <button class="nav-tab" 
+              [class.active]="router.url === '/history'" 
+              (click)="navigateTo('/history')">
+        <mat-icon>history</mat-icon>
+        <span>History</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

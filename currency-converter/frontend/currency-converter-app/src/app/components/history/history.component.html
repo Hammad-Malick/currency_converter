@@ -1,0 +1,109 @@
+<div class="history-container">
+  <!-- Header Section -->
+  <div class="history-header">
+    @if (history.length > 0) {
+      <button mat-raised-button 
+              color="warn" 
+              (click)="clearHistory()" 
+              class="clear-button">
+        <mat-icon>delete_sweep</mat-icon>
+        <span>Clear All</span>
+      </button>
+    }
+  </div>
+
+  <!-- History Content -->
+  <div class="history-content">
+    @if (history.length === 0) {
+      <!-- Empty State -->
+      <mat-card class="empty-state-card">
+        <mat-card-content>
+          <div class="empty-state">
+            <mat-icon class="empty-icon">history</mat-icon>
+            <h3 class="empty-title">No Conversion History</h3>
+            <p class="empty-message">
+              Your currency conversions will appear here once you start converting.
+            </p>
+            <button mat-raised-button 
+                    color="primary" 
+                    (click)="navigateToConverter()"
+                    class="start-button">
+              <mat-icon>currency_exchange</mat-icon>
+              <span>Start Converting</span>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <!-- History Items -->
+      <div class="history-list">
+        @for (item of history; track item.id) {
+          <mat-card class="history-item">
+            <mat-card-content>
+              <div class="conversion-header">
+                <div class="conversion-date">
+                  <mat-icon class="date-icon">schedule</mat-icon>
+                  <span>{{ formatDate(item.timestamp) }}</span>
+                </div>
+                <div class="conversion-id">#{{ item.id.slice(-6) }}</div>
+              </div>
+
+              <div class="conversion-details">
+                <div class="conversion-from">
+                  <div class="amount-display">
+                    <span class="amount">{{ item.amount | number:'1.2-2' }}</span>
+                    <span class="currency">{{ item.from }}</span>
+                  </div>
+                </div>
+
+                <div class="conversion-arrow">
+                  <mat-icon>arrow_forward</mat-icon>
+                </div>
+
+                <div class="conversion-to">
+                  <div class="amount-display result">
+                    <span class="amount">{{ item.result | number:'1.2-2' }}</span>
+                    <span class="currency">{{ item.to }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <mat-divider class="rate-divider"></mat-divider>
+
+              <div class="exchange-rate">
+                <mat-icon class="rate-icon">swap_horiz</mat-icon>
+                <span class="rate-text">
+                  1 {{ item.from }} = {{ item.rate | number:'1.6-6' }} {{ item.to }}
+                </span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <!-- Summary Stats -->
+      <mat-card class="stats-card">
+        <mat-card-content>
+          <div class="stats-header">
+            <mat-icon>analytics</mat-icon>
+            <span>Conversion Statistics</span>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">{{ history.length }}</div>
+              <div class="stat-label">Total Conversions</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ getUniqueCurrencies().length }}</div>
+              <div class="stat-label">Currencies Used</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ getTotalAmount() | number:'1.0-0' }}</div>
+              <div class="stat-label">Total Amount</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>

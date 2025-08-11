@@ -1,0 +1,154 @@
+<div class="currency-converter">
+  <!-- Loading State -->
+  @if (isLoading) {
+  <div class="loading-state">
+    <mat-spinner diameter="50" color="primary"></mat-spinner>
+    <p class="loading-text">Loading currencies...</p>
+  </div>
+  }
+
+  <!-- Main Container using Material Card -->
+  @if (!isLoading) {
+  <mat-card class="converter-card">
+    <mat-card-content>
+      <form [formGroup]="converterForm" (ngSubmit)="onSubmit()" class="converter-form">
+
+        <!-- Amount Input using Material Form Field -->
+        <mat-form-field appearance="outline" class="amount-field">
+          <mat-label>Amount</mat-label>
+          <input matInput type="number" formControlName="amount" placeholder="0.00">
+          @if (converterForm.get('amount')?.hasError('required')) {
+          <mat-error>Amount is required</mat-error>
+          }
+          @if (converterForm.get('amount')?.hasError('min')) {
+          <mat-error>Amount must be positive</mat-error>
+          }
+        </mat-form-field>
+
+                 <!-- Base Currency Material Select -->
+         <mat-form-field appearance="outline" class="currency-field">
+           <mat-label>Base Currency</mat-label>
+           <mat-select formControlName="fromCurrency">
+             <mat-select-trigger>
+               @if (converterForm.get('fromCurrency')?.value) {
+                 <div class="selected-currency">
+                   <span class="selected-flag">{{ getCountryFlag(converterForm.get('fromCurrency')?.value) }}</span>
+                   <span class="selected-code">{{ converterForm.get('fromCurrency')?.value }}</span>
+                   <span class="selected-symbol">{{ getCurrencySymbol(converterForm.get('fromCurrency')?.value) }}</span>
+                 </div>
+               }
+             </mat-select-trigger>
+             @for (currency of currencyList; track currency.code) {
+             <mat-option [value]="currency.code">
+               <div class="currency-option">
+                 <span class="currency-flag">{{ getCountryFlag(currency.code) }}</span>
+                 <span class="currency-details">
+                   <span class="currency-code">{{ currency.code }}</span>
+                   <span class="currency-name">{{ currency.name }}</span>
+                 </span>
+                 <span class="currency-symbol">{{ getCurrencySymbol(currency.code) }}</span>
+               </div>
+             </mat-option>
+             }
+           </mat-select>
+           @if (converterForm.get('fromCurrency')?.hasError('required')) {
+           <mat-error>Please select base currency</mat-error>
+           }
+         </mat-form-field>
+
+        <!-- Foreign Currency Material Select -->
+        <mat-form-field appearance="outline" class="currency-field">
+          <mat-label>Foreign Currency</mat-label>
+          <mat-select formControlName="toCurrency">
+            <mat-select-trigger>
+              @if (converterForm.get('toCurrency')?.value) {
+                <div class="selected-currency">
+                  <span class="selected-flag">{{ getCountryFlag(converterForm.get('toCurrency')?.value) }}</span>
+                  <span class="selected-code">{{ converterForm.get('toCurrency')?.value }}</span>
+                  <span class="selected-symbol">{{ getCurrencySymbol(converterForm.get('toCurrency')?.value) }}</span>
+                </div>
+              }
+            </mat-select-trigger>
+            @for (currency of currencyList; track currency.code) {
+            <mat-option [value]="currency.code">
+              <div class="currency-option">
+                <span class="currency-flag">{{ getCountryFlag(currency.code) }}</span>
+                <span class="currency-details">
+                  <span class="currency-code">{{ currency.code }}</span>
+                  <span class="currency-name">{{ currency.name }}</span>
+                </span>
+                <span class="currency-symbol">{{ getCurrencySymbol(currency.code) }}</span>
+              </div>
+            </mat-option>
+            }
+          </mat-select>
+          @if (converterForm.get('toCurrency')?.hasError('required')) {
+          <mat-error>Please select target currency</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Convert Button using Material Button -->
+        <button mat-raised-button color="primary" type="submit" class="convert-button"
+          [disabled]="!converterForm.valid || isLoading">
+          @if (!isLoading) {
+          <mat-icon>sync</mat-icon>
+          } @else {
+          <mat-spinner diameter="20"></mat-spinner>
+          }
+          <span>{{ isLoading ? 'Converting...' : 'Convert' }}</span>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  }
+
+  <!-- Result Display using Material Card -->
+  @if (conversionResult !== null) {
+  <mat-card class="result-card">
+    <mat-card-content>
+      <div class="result-header">
+        <mat-icon>trending_up</mat-icon>
+        <span class="result-label">Conversion Result</span>
+      </div>
+
+      <div class="result-amount">
+        {{ converterForm.get('amount')?.value | number:'1.2-2' }}
+        {{ converterForm.get('fromCurrency')?.value }} =
+      </div>
+
+      <div class="converted-amount">
+        <span class="currency-symbol">{{ getCurrencySymbol(converterForm.get('toCurrency')?.value) }}</span>
+        <span class="amount">{{ conversionResult | number:'1.2-2' }}</span>
+      </div>
+
+      <mat-divider class="result-divider"></mat-divider>
+
+      <div class="exchange-rates">
+        <div class="rate-item">
+          <mat-icon class="rate-icon">swap_horiz</mat-icon>
+          <span class="rate-text">
+            1 {{ converterForm.get('fromCurrency')?.value }} =
+            {{ (conversionResult / converterForm.get('amount')?.value) | number:'1.6-6' }}
+            {{ converterForm.get('toCurrency')?.value }}
+          </span>
+        </div>
+        <div class="rate-item">
+          <mat-icon class="rate-icon">swap_horiz</mat-icon>
+          <span class="rate-text">
+            1 {{ converterForm.get('toCurrency')?.value }} =
+            {{ (converterForm.get('amount')?.value / conversionResult) | number:'1.8-8' }}
+            {{ converterForm.get('fromCurrency')?.value }}
+          </span>
+        </div>
+      </div>
+
+      <div class="powered-by">
+        <mat-icon class="service-icon">verified</mat-icon>
+        <span class="service-text">
+          Powered by <strong>FreeCurrency API</strong>
+        </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

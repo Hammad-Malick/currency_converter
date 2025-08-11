@@ -1,0 +1,45 @@
+{
+  "name": "currency-converter-backend",
+  "version": "1.0.0",
+  "description": "TypeScript Currency Converter Backend with Express",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "npm run clean && tsc",
+    "build:watch": "tsc -w",
+    "clean": "rimraf dist",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "typescript",
+    "express",
+    "currency",
+    "api",
+    "converter"
+  ],
+  "author": "Currency Converter Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^24.2.1",
+    "nodemon": "^3.1.10",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

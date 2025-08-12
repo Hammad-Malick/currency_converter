@@ -1,6 +1,6 @@
 # Currency Converter
 
-A full-stack currency converter application built with Angular and Node.js.
+A full-stack currency converter application built with Angular and Node.js (expressjs).
 
 ## Features
 
@@ -13,7 +13,7 @@ A full-stack currency converter application built with Angular and Node.js.
 ## Tech Stack
 
 ### Frontend
-- Angular 17
+- Angular 20
 - Bootstrap 5
 - Angular Material
 - TypeScript
@@ -25,29 +25,6 @@ A full-stack currency converter application built with Angular and Node.js.
 - TypeScript
 - Free Currency API
 - CORS enabled
-
-## Project Structure
-
-```
-currency-converter/
-├── backend/                 # Node.js + Express + TypeScript backend
-│   ├── src/
-│   │   └── app.ts          # Main server file
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vercel.json         # Vercel deployment config
-└── frontend/
-    └── currency-converter-app/  # Angular frontend
-        ├── src/
-        │   ├── app/
-        │   │   ├── components/
-        │   │   │   ├── converter/    # Currency converter component
-        │   │   │   └── history/      # History display component
-        │   │   └── services/
-        │   │       └── currency.service.ts  # API and localStorage service
-        │   └── styles.scss     # Global styles
-        └── package.json
-```
 
 ## Prerequisites
 
@@ -68,10 +45,6 @@ cd currency-converter
 ```bash
 cd backend
 npm install
-
-# Create .env file with your API key
-echo "PORT=3000" > .env
-echo "API_KEY=4E0VK7BnkdeUuh1vegAt808v2IUjzUR6lxcvBMT2" >> .env
 
 # Build TypeScript
 npm run build
@@ -95,12 +68,6 @@ ng serve
 - Frontend: http://localhost:4200
 - Backend API: http://localhost:3000
 
-## API Endpoints
-
-### Backend Routes
-
-- `GET /currencies` - Fetch all supported currencies
-- `GET /convert?from=USD&to=EUR&amount=100` - Convert currency
 
 ## Usage
 
@@ -122,10 +89,6 @@ ng serve
 
 ## 🚀 Deployment
 
-### Quick Deployment to Vercel
-
-**📋 See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed step-by-step deployment instructions.**
-
 ### Summary:
 
 1. **Push to GitHub Repository**
@@ -137,17 +100,9 @@ ng serve
    - Auto-detects backend URL in production
 
 ### Live Demo URLs:
-- **Frontend**: `https://your-frontend.vercel.app`
-- **Backend API**: `https://your-backend.vercel.app`
-- **API Test**: `https://your-backend.vercel.app/test`
-
-### Environment Variables (Vercel Dashboard):
-```env
-# Backend Environment Variables
-API_KEY=4E0VK7BnkdeUuh1vegAt808v2IUjzUR6lxcvBMT2
-NODE_ENV=production
-CORS_ORIGINS=https://your-frontend.vercel.app,http://localhost:4200
-```
+- **Frontend**: `https://currency-converter-ta.vercel.app/`
+- **Backend API**: `https://currency-converter-backend-sage.vercel.app/`
+- **API Test**: `https://currency-converter-backend-sage.vercel.app/test`
 
 ## Development Scripts
 
@@ -163,14 +118,14 @@ CORS_ORIGINS=https://your-frontend.vercel.app,http://localhost:4200
 
 ## Features Implemented
 
-✅ **Backend Requirements**
+ **Backend Requirements**
 - Hidden API key (server-side only)
 - `/currencies` endpoint for supported currencies
 - `/convert` endpoint for currency conversion
 - TypeScript configuration
 - Environment variables support
 
-✅ **Frontend Requirements**
+**Frontend Requirements**
 - Mobile-first responsive design
 - Currency selection dropdowns
 - Amount input validation
@@ -180,20 +135,12 @@ CORS_ORIGINS=https://your-frontend.vercel.app,http://localhost:4200
 - Persistent history after page reload
 - Bootstrap + Angular Material styling
 
-✅ **Additional Features**
+**Additional Features**
 - Error handling and user feedback
 - Form validation
 - Clean, modern UI
 - Accessible design
 - SEO-friendly structure
-
-## API Key Setup
-
-1. Visit [Free Currency API](https://freecurrencyapi.com/)
-2. Sign up for a free account
-3. Get your API key
-4. Add it to your `.env` file in the backend directory
-5. For deployment, set it as an environment variable in Vercel
 
 ## Troubleshooting
 
@@ -209,7 +156,3 @@ CORS_ORIGINS=https://your-frontend.vercel.app,http://localhost:4200
 - Use `ng serve` for frontend development with hot reload
 - Check browser console for any JavaScript errors
 - Verify API endpoints are accessible
-
-## License
-
-MIT License - feel free to use this project for learning and development purposes.
